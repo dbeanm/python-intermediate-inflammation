@@ -80,3 +80,20 @@ def daily_above_threshold(row, data, threshold):
             return a
 
     return reduce(count_above_threshold, above, 0)
+
+def attach_names(data, names):
+    """Create datastructure containing patient records."""
+    assert len(data) == len(names)
+    output = []
+
+    for data_row, name in zip(data, names):
+        output.append({'name': name,
+                       'data': data_row})
+
+    return output
+
+def calculate_sd(data):
+    """
+    calculate standard deviation daily i.e. over all patients
+    """
+    return np.std(data, axis=0)
