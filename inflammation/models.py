@@ -62,3 +62,14 @@ def patient_normalise(data):
     normalised[np.isnan(normalised)] = 0
     normalised[normalised < 0] = 0
     return normalised
+
+def daily_above_threshold(row, data, threshold):
+    """
+    Is each daily value above the threshold
+    :param row:
+    :param data:
+    :param threshold:
+    :returns:
+    """
+    above = map(lambda x: x > threshold, data[row, ])
+    return list(above)
