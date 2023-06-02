@@ -8,7 +8,7 @@ and each column represents a single day across all patients.
 """
 
 import numpy as np
-
+from functools import reduce
 
 def load_csv(filename):
     """Load a Numpy array from a CSV
@@ -65,11 +65,18 @@ def patient_normalise(data):
 
 def daily_above_threshold(row, data, threshold):
     """
-    Is each daily value above the threshold
+    number of daily values above the threshold
     :param row:
     :param data:
     :param threshold:
     :returns:
     """
     above = map(lambda x: x > threshold, data[row, ])
-    return list(above)
+
+    def count_above_threshold(a, b):
+        if b:
+            return a + 1
+        else:
+            return a
+
+    return reduce(count_above_threshold, above, 0)
