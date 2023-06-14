@@ -44,6 +44,14 @@ def daily_min(data):
     """
     return np.min(data, axis=0)
 
+def daily_std(data):
+    """Calculate the daily standard deviation of a 2D inflammation data array.
+
+    :param data: inflammation data
+    :returns: standard deviation per day
+    """
+    return np.std(data, axis=0)
+
 def patient_normalise(data):
     """
     Normalise patient data from a 2D inflammation data array.
@@ -106,10 +114,17 @@ class Observation:
     def __str__(self):
         return str(self.value)
 
-class Patient:
-    """A patient in an inflammation study."""
+class Person:
     def __init__(self, name):
         self.name = name
+
+    def __str__(self):
+        return self.name
+
+class Patient(Person):
+    """A patient in an inflammation study."""
+    def __init__(self, name):
+        super().__init__(name)
         self.observations = []
 
     def add_observation(self, value, day=None):
@@ -125,5 +140,11 @@ class Patient:
         self.observations.append(new_observation)
         return new_observation
 
-    def __str__(self):
-        return self.name
+class Doctor(Person):
+    """A doctor in an inflammation study."""
+    def __init__(self, name):
+        super().__init__(name)
+        self.patients = []
+
+    def add_patient(self, p):
+        self.patients.append(p)
