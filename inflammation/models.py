@@ -140,6 +140,10 @@ class Patient(Person):
         self.observations.append(new_observation)
         return new_observation
 
+    @property
+    def last_observation(self):
+        return self.observations[-1]
+
 class Doctor(Person):
     """A doctor in an inflammation study."""
     def __init__(self, name):
