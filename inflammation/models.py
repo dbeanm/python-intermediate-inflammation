@@ -148,7 +148,8 @@ class Doctor(Person):
     """A doctor in an inflammation study."""
     def __init__(self, name):
         super().__init__(name)
-        self.patients = []
+        self.patients = set()         #no duplicate patients
+
 
     def add_patient(self, p):
-        self.patients.append(p)
+        self.patients.add(p)

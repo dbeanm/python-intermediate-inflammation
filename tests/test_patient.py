@@ -43,4 +43,4 @@ def test_no_duplicate_patients():
     alice = Patient("Alice")
     doc.add_patient(alice)
     doc.add_patient(alice)
-    assert len(doc.patients) == 1   
+    assert len(doc.patients) == 1
